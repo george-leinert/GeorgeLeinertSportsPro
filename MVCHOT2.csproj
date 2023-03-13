@@ -1,10 +1,53 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\01-AeroFlo-ATB-Wheels.jpg" />
+    <None Include="wwwroot\images\02-Clear-Shade-85-T-Glasses.jpg" />
+    <None Include="wwwroot\images\03-Cosmic-Elite-Road-Warrior-Wheels.jpg" />
+    <None Include="wwwroot\images\04-Cycle-Doc-Pro-Repair-Stand.jpg" />
+    <None Include="wwwroot\images\05-Dog-Ear-Aero-Flow-Floor-Pump.jpg" />
+    <None Include="wwwroot\images\06-Dog-Ear-Cycle-Computer.jpg" />
+    <None Include="wwwroot\images\07-Dog-Ear-Helmet-Mount-Mirror.jpg" />
+    <None Include="wwwroot\images\08-Dog-Ear-Monster-Grip-Gloves.jpg" />
+    <None Include="wwwroot\images\09-Eagle-FS-3-Mountain-Bike.jpg" />
+    <None Include="wwwroot\images\10-Eagle-SA-120-Clipless-Pedals.jpg" />
+    <None Include="wwwroot\images\11-Glide-O-Matic-Cycling-Helmet.jpg" />
+    <None Include="wwwroot\images\12-GT-RTS-2-Mountain-Bike.jpg" />
+    <None Include="wwwroot\images\13-HP-Deluxe-Panniers.jpg" />
+    <None Include="wwwroot\images\14-King-Cobra-Helmet.jpg" />
+    <None Include="wwwroot\images\15-Kool-Breeze-Rocket-Top-Jersey.jpg" />
+    <None Include="wwwroot\images\16-Kryptonite-Advanced-2000-U-Lock.jpg" />
+    <None Include="wwwroot\images\17-Nikoma-Lok-Tight-U-Lock.jpg" />
+    <None Include="wwwroot\images\18-Proformance-ATB-All-Terrain-Pedal.jpg" />
+    <None Include="wwwroot\images\19-ProFormance-Toe-Klips-2G.jpg" />
+    <None Include="wwwroot\images\20-Pro-Sport-Dillo-Shades.jpg" />
+    <None Include="wwwroot\images\21-Road-Warrior-Hitch-Pack.jpg" />
+    <None Include="wwwroot\images\22-Shinoman-105-SC-Brakes.jpg" />
+    <None Include="wwwroot\images\23-Shinoman-Deluxe-TX-30-Pedal.jpg" />
+    <None Include="wwwroot\images\24-Shinoman-Dura-Ace-Headset.jpg" />
+    <None Include="wwwroot\images\25-StaDry-Cycling-Pants.jpg" />
+    <None Include="wwwroot\images\26-TransPort-Bicycle-Rack.jpg" />
+    <None Include="wwwroot\images\27-Trek-9000-Mountain-Bike.jpg" />
+    <None Include="wwwroot\images\28-True-Grip-Competition-Gloves.jpg" />
+    <None Include="wwwroot\images\29-Turbo-Twin-Tires.jpg" />
+    <None Include="wwwroot\images\30-Ultimate-Export-2G-Car-Rack.jpg" />
+    <None Include="wwwroot\images\31-Ultra-2K-Competition-Tire.jpg" />
+    <None Include="wwwroot\images\32-Ultra-Pro-Rain-Jacket.jpg" />
+    <None Include="wwwroot\images\33-Victoria-Pro-All-Weather-Tires.jpg" />
+    <None Include="wwwroot\images\34-Viscount-C-500-Wireless-Bike-Computer.jpg" />
+    <None Include="wwwroot\images\35-Viscount-CardioSport-Sport-Watch.jpg" />
+    <None Include="wwwroot\images\36-Viscount-Microshell-Helmet.jpg" />
+    <None Include="wwwroot\images\37-Viscount-Mountain-Bikes.jpg" />
+    <None Include="wwwroot\images\38-Viscount-Tru-Beat-Heart-Transmitter.jpg" />
+    <None Include="wwwroot\images\39-Wonder-Wood-Cycle-Socks.jpg" />
+    <None Include="wwwroot\images\40-X-Pro-All-Weather-Tires.jpg" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />

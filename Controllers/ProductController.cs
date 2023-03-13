@@ -10,9 +10,11 @@ namespace MVCHOT2.Controllers
 
 		public ProductController(ProductContext ctx) => context = ctx;
 
+		[Route ("products/")]
 		public IActionResult Index()
 		{
 			var products = context.Products.OrderBy(p => p.ProductName).ToList();
+			ViewBag.Categories = context.Categories.OrderBy(c => c.CategoryName).ToList();
 			return View("List", products);
 		}
 
@@ -71,6 +73,13 @@ namespace MVCHOT2.Controllers
 			context.Products.Remove(product);
 			context.SaveChanges();
 			return RedirectToAction("Index", "Home");
+		}
+
+		[HttpGet]
+		public IActionResult Details(int id)
+		{
+			var product = context.Products.Find(id);
+			return View(product);
 		}
 
 
