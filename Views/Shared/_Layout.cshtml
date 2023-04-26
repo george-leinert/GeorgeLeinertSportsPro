@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity;
+@using MVCHOT2.Models;
+@inject SignInManager<User> signInManager
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -27,6 +31,43 @@
 					<li class="nav-item active">
 						<a asp-action="Index" asp-controller="Customers" class="nav-link">Customers</a>
 					</li>
+					@if (signInManager.IsSignedIn(User))
+					{
+						<li class="nav-item active">
+							<span class="nav-link">@User.Identity.Name</span>
+						</li>
+						<li class="nav-item active">
+							<form method="post" asp-action="LogOut" asp-controller="Account"
+							  asp-area="">
+								<input type="submit" value="Log Out"
+									   class="btn nav-link" />
+								<span class="text-light">Log Out</span>
+							</form>
+						</li>
+
+					}
+					else
+					{
+
+						var action = ViewContext.RouteData.Values["action"]?.ToString();
+
+						<li class="nav-item active">
+							<a asp-action="Register" asp-controller="Account" class="nav-link">Register</a>
+						</li>
+						<li class="nav-item active">
+							<a asp-action="Login" asp-controller="Account" class="nav-link">Login</a>
+						</li>
+
+					}
+					@if (signInManager.IsSignedIn(User))
+					{
+						@if (User.IsInRole("Admin"))
+						{
+							<li class="nav-item active">
+								<a asp-action="Index" asp-controller="User" class="nav-link">User</a>
+							</li>
+						}
+					}
 
 					<li class="nav-item active">
 						<a href="#" class="nav-link">Privacy</a>

@@ -1,8 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 
 namespace MVCHOT2.Models
 {
-    public class ProductContext : DbContext
+    public class ProductContext : IdentityDbContext<User>
     {
 
         public ProductContext(DbContextOptions<ProductContext> options) : base(options) { }
@@ -16,6 +19,9 @@ namespace MVCHOT2.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Product>().HasData(
                 new Product
                 {

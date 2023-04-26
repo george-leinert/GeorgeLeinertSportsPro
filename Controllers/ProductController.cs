@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVCHOT2.Models;
 
@@ -80,6 +81,12 @@ namespace MVCHOT2.Controllers
 		{
 			var product = context.Products.Find(id);
 			return View(product);
+		}
+
+		[Authorize]
+		public IActionResult Cart()
+		{
+			return View("Cart");
 		}
 
 
