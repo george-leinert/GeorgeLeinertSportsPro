@@ -6,6 +6,7 @@ namespace MVCHOT2.Models
 	{
 		public static async Task CreateAdminUserAsync(IServiceProvider provider)
 		{
+
 			var roleManager = provider.GetRequiredService<RoleManager<IdentityRole>>();
 
 			var userManager = provider.GetRequiredService<UserManager<User>>();
@@ -14,13 +15,15 @@ namespace MVCHOT2.Models
 			string password = "Admin123";
 			string roleName = "Admin";
 
-			if (await roleManager.FindByNameAsync(roleName) == null)
+			if (await roleManager.FindByNameAsync("Admin") == null)
 			{
+				await roleManager.CreateAsync(new IdentityRole("Admin"));
+
 				User user = new User { UserName = username };
 				var result = await userManager.CreateAsync(user, password);
 				if (result.Succeeded)
 				{
-					await userManager.AddToRoleAsync(user, roleName);
+					await userManager.AddToRoleAsync(user, "Admin");
 				}
 			}
 		}
