@@ -11,7 +11,7 @@ namespace MVCHOT2.Models
 			var userManager = provider.GetRequiredService<UserManager<User>>();
 
 			string username = "admin";
-			string password = "admin123";
+			string password = "Admin123";
 			string roleName = "Admin";
 
 			if (await roleManager.FindByNameAsync(roleName) == null)
