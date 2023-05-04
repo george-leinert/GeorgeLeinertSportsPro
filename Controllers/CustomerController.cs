@@ -1,19 +1,20 @@
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using MVCHOT2.Models;
 
 namespace MVCHOT2.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CustomerController : Controller
     {
-        private ProductContext context { get; set; }
+        private SportsProContext context { get; set; }
 
-        public CustomerController(ProductContext ctx) => context = ctx;
+        public CustomerController(SportsProContext ctx) => context = ctx;
 
-		[Route("customers/")]
-		public IActionResult Index()
+        [Route("customers/")]
+        public IActionResult Index()
         {
-            var customers = context.Customers.OrderBy(c => c.CustomerFirstName).ToList();
+            var customers = context.Customers.OrderBy(c => c.Name).ToList();
             return View("List", customers);
         }
 
@@ -21,6 +22,7 @@ namespace MVCHOT2.Controllers
         public IActionResult Add()
         {
             ViewBag.Action = "Add";
+            ViewBag.Countries = context.Countries.OrderBy(c => c.Name).ToList();
             return View("Edit", new Customer());
         }
 
@@ -30,6 +32,7 @@ namespace MVCHOT2.Controllers
         {
             ViewBag.Action = "Edit";
             var customer = context.Customers.Find(id);
+            ViewBag.Countries = context.Countries.OrderBy(c => c.Name).ToList();
             return View(customer);
         }
 
@@ -51,7 +54,8 @@ namespace MVCHOT2.Controllers
             }
             else
             {
-                ViewBag.Action = (modifiedCustomer.CustomerID == 0) ? "Add" : "Edit";
+                ViewBag.Countries = context.Countries.OrderBy(c => c.Name).ToList();
+                ViewBag.Action = modifiedCustomer.CustomerID == 0 ? "Add" : "Edit";
                 return View(modifiedCustomer);
             }
         }
@@ -70,7 +74,5 @@ namespace MVCHOT2.Controllers
             context.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
-
-
     }
 }

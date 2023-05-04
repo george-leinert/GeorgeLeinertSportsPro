@@ -1,14 +1,14 @@
 ﻿@using MVCHOT2.Models;
-@model Category
+@model Technician
 @{
-	ViewData["Title"] = "Delete A Category";
+	ViewData["Title"] = "Delete A Technician";
 	Layout = "_Layout";
 
 }
 <h2>Confirm Deletion</h2>
-<h3>Are you sure want to delete @Model.CategoryName</h3>
+<h3>Are you sure want to delete @Model.Name</h3>
 <form asp-action="Delete" method="post">
-	<input type="hidden" asp-for="CategoryID" />
+	<input type="hidden" asp-for="TechnicianID" />
 	<button type="submit" class="btn btn-primary">Yes</button>
 	<a asp-action="Index" asp-controller="Home" class="btn btn-secondary">No</a>
 </form>

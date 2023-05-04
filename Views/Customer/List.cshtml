@@ -1,38 +1,25 @@
 ﻿@using MVCHOT2.Models;
 @model List<Customer>
 @{
-	ViewData["Title"] = "List";
+	ViewData["Title"] = "List Customers";
 	Layout = "_Layout";
 }
+<h2>Customer Manager</h2>
 <table class="table table-bordered">
 	<thead>
 		<tr>
 			<th>
-				First Name
+				Name
 			</th>
 			<th>
-				Last Name
-			</th>
-			<th>
-				Address
+				Email
 			</th>
 			<th>
 				City
 			</th>
 			<th>
-				State
 			</th>
 			<th>
-				Zip Code
-			</th>
-			<th>
-				Phone
-			</th>
-			<th>
-
-			</th>
-			<th>
-
 			</th>
 		</tr>
 	</thead>
@@ -41,35 +28,23 @@
 		{
 			<tr>
 				<td>
-					@customer.CustomerFirstName
+					@customer.Name
 				</td>
 				<td>
-					@customer.CustomerLastName
+					@customer.Email
 				</td>
 				<td>
-					@customer.CustomerStreetAddress
+					@customer.City
 				</td>
 				<td>
-					@customer.CustomerCity
+					<a asp-controller="Customer" asp-action="Edit" asp-route-id="@customer.CustomerID" class="btn btn-primary">Edit</a>
 				</td>
 				<td>
-					@customer.CustomerState
-				</td>
-				<td>
-					@customer.CustomerZipCode
-				</td>
-				<td>
-					@customer.CustomerPhoneNumber
-				</td>
-				<td>
-					<a asp-controller="Customer" asp-action="Edit" asp-route-id="@customer.CustomerID" class="btn btn-secondary">Edit</a>
-				</td>
-				<td>
-					<a asp-controller="Customer" asp-action="Delete" asp-route-id="@customer.CustomerID" class="btn btn-secondary">Delete</a>
+					<a asp-controller="Customer" asp-action="Delete" asp-route-id="@customer.CustomerID" class="btn btn-danger">Delete</a>
 				</td>
 
 			</tr>
 		}
 	</tbody>
 </table>
-<a asp-controller="Customer" asp-action="Add" class="btn btn-secondary">Add Customer</a>
+<a asp-controller="Customer" asp-action="Add" class="btn btn-primary">Add Customer</a>

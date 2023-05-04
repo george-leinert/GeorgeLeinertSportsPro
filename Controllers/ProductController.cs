@@ -1,94 +1,82 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using MVCHOT2.Models;
 
 namespace MVCHOT2.Controllers
 {
+	[Authorize(Roles = "Admin")]
 	public class ProductController : Controller
-	{
-		private ProductContext context { get; set; }
+    {
+        private SportsProContext context { get; set; }
 
-		public ProductController(ProductContext ctx) => context = ctx;
-
-		[Route ("products/")]
-		public IActionResult Index()
-		{
-			var products = context.Products.OrderBy(p => p.ProductName).ToList();
-			ViewBag.Categories = context.Categories.OrderBy(c => c.CategoryName).ToList();
-			return View("List", products);
-		}
-
-		[HttpGet]
-		public IActionResult Add()
-		{
-			ViewBag.Action = "Add";
-			ViewBag.Categories = context.Categories.OrderBy(c => c.CategoryName).ToList();
-			return View("Edit", new Product());
-		}
+        public ProductController(SportsProContext ctx) => context = ctx;
 
 
-		[HttpGet]
-		public IActionResult Edit(int id)
-		{
-			ViewBag.Action = "Edit";
-			ViewBag.Categories = context.Categories.OrderBy(c => c.CategoryName).ToList();
-			var product = context.Products.Find(id);
-			return View(product);
-		}
+        [Route("products/")]
+        public ViewResult Index()
+        {
+            var products = context.Products.OrderBy(p => p.Name).ToList();
+            return View("List", products);
+        }
 
-		[HttpPost]
-		public IActionResult Edit(Product modifiedProduct)
-		{
-			if (ModelState.IsValid)
-			{
-				if (modifiedProduct.ProductID == 0)
-				{
-					context.Products.Add(modifiedProduct);
-				}
-				else
-				{
-					context.Products.Update(modifiedProduct);
-				}
-				context.SaveChanges();
-				return RedirectToAction("Index", "Home");
-			}
-			else
-			{
-				ViewBag.Action = (modifiedProduct.ProductID == 0) ? "Add" : "Edit";
-				ViewBag.Categories = context.Categories.OrderBy(c => c.CategoryName).ToList();
-				return View(modifiedProduct);
-			}
-		}
-
-		[HttpGet]
-		public IActionResult Delete(int id)
-		{
-			var product = context.Products.Find(id);
-			return View(product);
-		}
-
-		[HttpPost]
-		public IActionResult Delete(Product product)
-		{
-			context.Products.Remove(product);
-			context.SaveChanges();
-			return RedirectToAction("Index", "Home");
-		}
-
-		[HttpGet]
-		public IActionResult Details(int id)
-		{
-			var product = context.Products.Find(id);
-			return View(product);
-		}
-
-		[Authorize]
-		public IActionResult Cart()
-		{
-			return View("Cart");
-		}
+        [HttpGet]
+        public ViewResult Add()
+        {
+            ViewBag.Action = "Add";
+            return View("Edit", new Product());
+        }
 
 
-	}
+        [HttpGet]
+        public ViewResult Edit(int id)
+        {
+            ViewBag.Action = "Edit";
+            var product = context.Products.Find(id);
+            return View(product);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Product modifiedProduct)
+        {
+            if (ModelState.IsValid)
+            {
+                if (modifiedProduct.ProductID == 0)
+                {
+                    context.Products.Add(modifiedProduct);
+                    TempData["message"] = $"{modifiedProduct.Name} was added.";
+                }
+                else
+                {
+                    context.Products.Update(modifiedProduct);
+                    TempData["message"] = $"{modifiedProduct.Name} was updated.";
+
+                }
+                context.SaveChanges();
+                return RedirectToAction("Index", "Product");
+            }
+            else
+            {
+                ViewBag.Action = modifiedProduct.ProductID == 0 ? "Add" : "Edit";
+                return View(modifiedProduct);
+            }
+        }
+
+        [HttpGet]
+        public ViewResult Delete(int id)
+        {
+            var product = context.Products.Find(id);
+            return View(product);
+        }
+
+        [HttpPost]
+        public RedirectToActionResult Delete(Product product)
+        {
+            var productName = product.Name;
+            TempData["message"] = $"{productName} was deleted";
+            context.Products.Remove(product);
+            context.SaveChanges();
+            return RedirectToAction("Index", "Product");
+        }
+
+    }
 }

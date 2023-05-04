@@ -1,43 +1,31 @@
 ﻿@using MVCHOT2.Models;
 @model List<Product>
 @{
-	ViewData["Title"] = "List";
+	ViewData["Title"] = "List Products";
 	Layout = "_Layout";
 }
+<h2>Product Manager</h2>
+
+
 <table class="table table-bordered">
 	<thead>
 		<tr>
 			<th>
+				Code
+			</th>
+			<th>
 				Name
-			</th>
-			<th>
-				Short Description
-			</th>
-			<th>
-				Long Description
-			</th>
-			<th>
-				Image
 			</th>
 			<th>
 				Price
 			</th>
 			<th>
-				Quantity
+				Release Date
 			</th>
 			<th>
-				Category
 			</th>
 			<th>
-
 			</th>
-			<th>
-
-			</th>
-			<th>
-
-			</th>
-
 		</tr>
 	</thead>
 	<tbody>
@@ -45,38 +33,26 @@
 		{
 			<tr>
 				<td>
-					<a asp-controller="Product" asp-action="Details" asp-route-id="@product.ProductID">@product.ProductName</a>
+					@product.Code
 				</td>
 				<td>
-					@product.ProductDescShort
+					@product.Name
 				</td>
 				<td>
-					@product.ProductDescLong
+					@product.Price
 				</td>
 				<td>
-					@product.ProductImage
+					@product.ReleaseDate
 				</td>
 				<td>
-					@product.ProductPrice
+					<a asp-controller="Product" asp-action="Edit" asp-route-id="@product.ProductID" class="btn btn-primary">Edit</a>
 				</td>
 				<td>
-					@product.ProductQty
-				</td>
-				<td>
-					@product.CategoryID
-				</td>
-				<td>
-					<a asp-controller="Product" asp-action="Edit" asp-route-id="@product.ProductID" class="btn btn-secondary">Edit</a>
-				</td>
-				<td>
-					<a asp-controller="Product" asp-action="Delete" asp-route-id="@product.ProductID" class="btn btn-secondary">Delete</a>
-				</td>
-				<td>
-					<a asp-controller="Product" asp-action="Cart"  class="btn btn-secondary">Add To Cart</a>
+					<a asp-controller="Product" asp-action="Delete" asp-route-id="@product.ProductID" class="btn btn-danger">Delete</a>
 				</td>
 
 			</tr>
 		}
 	</tbody>
 </table>
-<a asp-controller="Product" asp-action="Add" class="btn btn-secondary">Add Product</a>
+<a asp-controller="Product" asp-action="Add" class="btn btn-primary">Add Product</a>

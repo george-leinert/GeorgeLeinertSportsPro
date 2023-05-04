@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<ProductContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ProductContext")));
+builder.Services.AddDbContext<SportsProContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ProductContext")));
 
 builder.Services.AddIdentity<User, IdentityRole>(options => {
     options.Password.RequiredLength = 6;
@@ -17,13 +17,17 @@ builder.Services.AddIdentity<User, IdentityRole>(options => {
     options.Password.RequireDigit = false;
     options.Password.RequireUppercase = false;
     }
-).AddEntityFrameworkStores<ProductContext>().AddDefaultTokenProviders();
+).AddEntityFrameworkStores<SportsProContext>().AddDefaultTokenProviders();
 
 builder.Services.AddRouting(options =>
 {
     options.LowercaseUrls = true;
     options.AppendTrailingSlash = true;
 });
+
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
+
 
 var app = builder.Build();
 
@@ -39,6 +43,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();
+
 
 app.UseAuthentication();
 
